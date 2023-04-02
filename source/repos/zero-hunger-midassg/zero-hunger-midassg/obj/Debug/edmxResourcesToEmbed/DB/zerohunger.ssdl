@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zerohungerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="employees">
+    <Key>
+      <PropertyRef Name="e_id" />
+    </Key>
+    <Property Name="e_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="e_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="e_uname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="e_pass" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ngo_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NGOs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="res_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="expiry" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="restaurants">
+    <Key>
+      <PropertyRef Name="r_id" />
+    </Key>
+    <Property Name="r_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="r_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="food_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="availibility" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="expiryDate" Type="datetime" Nullable="false" />
+    <Property Name="r_uname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="r_pass" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ngo_id" Type="int" />
+  </EntityType>
+  <Association Name="FK_employees_NGOs">
+    <End Role="NGOs" Type="Self.NGOs" Multiplicity="1" />
+    <End Role="employees" Type="Self.employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NGOs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="ngo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_restaurants_NGOs">
+    <End Role="NGOs" Type="Self.NGOs" Multiplicity="0..1" />
+    <End Role="restaurants" Type="Self.restaurants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NGOs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="restaurants">
+        <PropertyRef Name="ngo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="zerohungerModelStoreContainer">
+    <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NGOs" EntityType="Self.NGOs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="restaurants" EntityType="Self.restaurants" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_employees_NGOs" Association="Self.FK_employees_NGOs">
+      <End Role="NGOs" EntitySet="NGOs" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_restaurants_NGOs" Association="Self.FK_restaurants_NGOs">
+      <End Role="NGOs" EntitySet="NGOs" />
+      <End Role="restaurants" EntitySet="restaurants" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

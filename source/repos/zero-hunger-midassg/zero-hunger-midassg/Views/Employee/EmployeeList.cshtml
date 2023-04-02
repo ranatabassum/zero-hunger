@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeList";
+}
+
+<h2>EmployeeList</h2>
+<table class="table">
+
+    <tr>
+        <th>
+            Employee ID
+        </th>
+
+        <th>
+            Employee Name
+        </th>
+       
+
+    </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.e_id
+            </td>
+            <td>
+                @item.e_name
+            </td>
+
+            
+
+        </tr>
+    }
+

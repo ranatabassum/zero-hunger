@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="zerohungerModelStoreContainer" CdmEntityContainer="zerohungerEntities2">
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="zerohungerModel.employee">
+        <MappingFragment StoreEntitySet="employees">
+          <ScalarProperty Name="e_id" ColumnName="e_id" />
+          <ScalarProperty Name="e_name" ColumnName="e_name" />
+          <ScalarProperty Name="e_uname" ColumnName="e_uname" />
+          <ScalarProperty Name="e_pass" ColumnName="e_pass" />
+          <ScalarProperty Name="ngo_id" ColumnName="ngo_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NGOs">
+      <EntityTypeMapping TypeName="zerohungerModel.NGO">
+        <MappingFragment StoreEntitySet="NGOs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="res_name" ColumnName="res_name" />
+          <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+          <ScalarProperty Name="expiry" ColumnName="expiry" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="restaurants">
+      <EntityTypeMapping TypeName="zerohungerModel.restaurant">
+        <MappingFragment StoreEntitySet="restaurants">
+          <ScalarProperty Name="r_id" ColumnName="r_id" />
+          <ScalarProperty Name="r_name" ColumnName="r_name" />
+          <ScalarProperty Name="food_name" ColumnName="food_name" />
+          <ScalarProperty Name="availibility" ColumnName="availibility" />
+          <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+          <ScalarProperty Name="r_uname" ColumnName="r_uname" />
+          <ScalarProperty Name="r_pass" ColumnName="r_pass" />
+          <ScalarProperty Name="ngo_id" ColumnName="ngo_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

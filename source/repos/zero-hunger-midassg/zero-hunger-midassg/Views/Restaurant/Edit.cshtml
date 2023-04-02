@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post">
+    
+    Restaurant Name: <input type="text" name="r_name" value="@Model.r_name" class="form-control" />
+    Food Name: <input type="text" name="food_name" value="@Model.food_name" class="form-control" />
+    Availibility: <input type="text" name="availibility" value="@Model.availibility" class="form-control" />
+    Expiry Date: <input type="date" name="expiryDate" value="@Model.expiryDate" class="form-control" />
+    User Name: <input type="text" name="r_uname" value="@Model.r_uname" class="form-control" />
+    Password: <input type="password" name="r_pass" value="@Model.r_pass" class="form-control" />
+    <p>
+
+    </p>
+    <input type="submit" name="Edit" class="btn-danger">
+
+
+</form>

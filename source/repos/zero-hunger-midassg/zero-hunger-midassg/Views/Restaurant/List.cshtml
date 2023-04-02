@@ -1,0 +1,62 @@
+﻿@model IEnumerable<zero_hunger_midassg.DB.restaurant>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<table class="table">
+
+    <tr>
+        <th>
+            Restaurant ID
+        </th>
+
+        <th>
+            Restaurant Name
+        </th>
+        <th>
+            Food Name
+        </th>
+        <th>
+            Availibility
+        </th>
+        <th>
+            Expiry Date
+        </th>
+
+    </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.r_id
+            </td>
+            <td>
+                @item.r_name
+            </td>
+
+            <td>
+                @item.food_name
+            </td>
+            <td>
+                @item.availibility
+            </td>
+            <td>
+                @item.expiryDate
+            </td>
+
+            <td>
+                <a href="/restaurant/Edit/@item.r_id">Edit</a>
+                
+                
+            </td>
+
+        </tr>
+    }
+
+
+</table>

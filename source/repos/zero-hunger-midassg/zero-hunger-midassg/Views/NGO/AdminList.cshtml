@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "AdminList";
+}
+
+<h2>AdminList</h2>
+<table class="table">
+
+    <tr>
+        <th>
+            Restaurant ID
+        </th>
+
+        <th>
+            Restaurant Name
+        </th>
+        <th>
+            Food Name
+        </th>
+        <th>
+            Availibility
+        </th>
+        <th>
+            Expiry Date
+        </th>
+        <th>
+            Employee Assgined
+        </th>
+
+
+    </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.r_id
+            </td>
+            <td>
+                @item.r_name
+            </td>
+
+            <td>
+                @item.food_name
+            </td>
+            <td>
+                @item.availibility
+            </td>
+            <td>
+                @item.expiryDate
+            </td>
+            <td>
+                @item.emp_name
+            </td>
+
+            <td>
+                <a href="/restaurant/Edit/@item.r_id">Edit</a>
+
+
+            </td>
+
+        </tr>
+    }
+
+
+</table>
+

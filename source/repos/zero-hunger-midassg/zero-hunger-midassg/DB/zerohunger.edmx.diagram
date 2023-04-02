@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="500822fa0e2044aeae9f8e0d6df37678" Name="Diagram1">
+        <EntityTypeShape EntityType="zerohungerModel.employee" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="zerohungerModel.NGO" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="zerohungerModel.restaurant" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="zerohungerModel.FK_employees_NGOs" ManuallyRouted="false" />
+        <AssociationConnector Association="zerohungerModel.FK_restaurants_NGOs" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

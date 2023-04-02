@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="zerohungerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="e_id" />
+          </Key>
+          <Property Name="e_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="e_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="e_uname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="e_pass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ngo_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NGOs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="res_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="emp_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="expiry" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="restaurants">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="r_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="food_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="availibility" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="expiryDate" Type="datetime" Nullable="false" />
+          <Property Name="r_uname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="r_pass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ngo_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_employees_NGOs">
+          <End Role="NGOs" Type="Self.NGOs" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGOs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="ngo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_restaurants_NGOs">
+          <End Role="NGOs" Type="Self.NGOs" Multiplicity="0..1" />
+          <End Role="restaurants" Type="Self.restaurants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGOs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="restaurants">
+              <PropertyRef Name="ngo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zerohungerModelStoreContainer">
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGOs" EntityType="Self.NGOs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="restaurants" EntityType="Self.restaurants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_employees_NGOs" Association="Self.FK_employees_NGOs">
+            <End Role="NGOs" EntitySet="NGOs" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_restaurants_NGOs" Association="Self.FK_restaurants_NGOs">
+            <End Role="NGOs" EntitySet="NGOs" />
+            <End Role="restaurants" EntitySet="restaurants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="zerohungerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="e_id" />
+          </Key>
+          <Property Name="e_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="e_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="e_uname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="e_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ngo_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NGO" Relationship="Self.FK_employees_NGOs" FromRole="employees" ToRole="NGOs" />
+        </EntityType>
+        <EntityType Name="NGO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="res_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="expiry" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="employees" Relationship="Self.FK_employees_NGOs" FromRole="NGOs" ToRole="employees" />
+          <NavigationProperty Name="restaurants" Relationship="Self.FK_restaurants_NGOs" FromRole="NGOs" ToRole="restaurants" />
+        </EntityType>
+        <EntityType Name="restaurant">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="r_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="food_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="availibility" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="expiryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="r_uname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="r_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ngo_id" Type="Int32" />
+          <NavigationProperty Name="NGO" Relationship="Self.FK_restaurants_NGOs" FromRole="restaurants" ToRole="NGOs" />
+        </EntityType>
+        <Association Name="FK_employees_NGOs">
+          <End Role="NGOs" Type="Self.NGO" Multiplicity="1" />
+          <End Role="employees" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGOs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="ngo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_restaurants_NGOs">
+          <End Role="NGOs" Type="Self.NGO" Multiplicity="0..1" />
+          <End Role="restaurants" Type="Self.restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGOs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="restaurants">
+              <PropertyRef Name="ngo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zerohungerEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="NGOs" EntityType="Self.NGO" />
+          <EntitySet Name="restaurants" EntityType="Self.restaurant" />
+          <AssociationSet Name="FK_employees_NGOs" Association="Self.FK_employees_NGOs">
+            <End Role="NGOs" EntitySet="NGOs" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_restaurants_NGOs" Association="Self.FK_restaurants_NGOs">
+            <End Role="NGOs" EntitySet="NGOs" />
+            <End Role="restaurants" EntitySet="restaurants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="zerohungerModelStoreContainer" CdmEntityContainer="zerohungerEntities2">
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="zerohungerModel.employee">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="e_id" ColumnName="e_id" />
+                <ScalarProperty Name="e_name" ColumnName="e_name" />
+                <ScalarProperty Name="e_uname" ColumnName="e_uname" />
+                <ScalarProperty Name="e_pass" ColumnName="e_pass" />
+                <ScalarProperty Name="ngo_id" ColumnName="ngo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NGOs">
+            <EntityTypeMapping TypeName="zerohungerModel.NGO">
+              <MappingFragment StoreEntitySet="NGOs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="res_name" ColumnName="res_name" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="expiry" ColumnName="expiry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="restaurants">
+            <EntityTypeMapping TypeName="zerohungerModel.restaurant">
+              <MappingFragment StoreEntitySet="restaurants">
+                <ScalarProperty Name="r_id" ColumnName="r_id" />
+                <ScalarProperty Name="r_name" ColumnName="r_name" />
+                <ScalarProperty Name="food_name" ColumnName="food_name" />
+                <ScalarProperty Name="availibility" ColumnName="availibility" />
+                <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+                <ScalarProperty Name="r_uname" ColumnName="r_uname" />
+                <ScalarProperty Name="r_pass" ColumnName="r_pass" />
+                <ScalarProperty Name="ngo_id" ColumnName="ngo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
